@@ -12,8 +12,6 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-
-
 const App = () => {
   const todoListRef = useRef(null);
 
