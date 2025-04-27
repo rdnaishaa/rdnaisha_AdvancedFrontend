@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
+import { Contact } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,21 +9,18 @@ const Navbar = () => {
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Track scroll position for navbar hide/show effect
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       setPrevScrollPosition(scrollPosition);
       setScrollPosition(currentScrollPos);
 
-      // Show/hide navbar based on scroll direction
       if (currentScrollPos > 80) {
         setIsVisible(prevScrollPosition > currentScrollPos || currentScrollPos < 10);
       } else {
         setIsVisible(true);
       }
 
-      // Update active menu item based on scroll position
       updateActiveSection();
     };
 
@@ -30,14 +28,13 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollPosition, prevScrollPosition]);
 
-  // Helper function to update active section based on scroll position
   const updateActiveSection = () => {
     const sections = navItems.map(item => {
       const element = document.getElementById(item.toLowerCase());
       if (element) {
         return {
           id: item,
-          offsetTop: element.offsetTop - 100, // Adjust for navbar height
+          offsetTop: element.offsetTop - 100,
           offsetBottom: element.offsetTop + element.offsetHeight - 100
         };
       }
@@ -60,19 +57,15 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Enhanced click handler with smooth scrolling
   const handleMenuItemClick = (item) => {
     setActiveItem(item);
     setIsMenuOpen(false);
 
-    // Smooth scroll to the section
     const targetSection = document.getElementById(item.toLowerCase());
     if (targetSection) {
-      // Calculate position accounting for navbar height
-      const navbarHeight = 64; // Default navbar height in pixels
+      const navbarHeight = 64;
       const targetPosition = targetSection.offsetTop - navbarHeight;
 
-      // Smooth scroll with animation
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
@@ -80,21 +73,18 @@ const Navbar = () => {
     }
   };
 
-  const navItems = ['Home', 'Gallery', 'Journey', 'Contact'];
+  const navItems = ['Home', 'Gallery', 'Task', 'Contact'];
 
   return (
     <nav className={`fixed top-0 w-full bg-white/80 dark:bg-gray-900/90 backdrop-blur-sm shadow-md transition-all duration-300 z-50 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
-          {/* Logo with hover effect */}
           <div className="flex-shrink-0 group">
             <h1 className="text-teal-700 dark:text-teal-400 font-bold text-xl relative overflow-hidden">
               R. Aisha Syauqi Ramadhani
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-teal-500 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
             </h1>
           </div>
-
-          {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <button 
@@ -105,15 +95,9 @@ const Navbar = () => {
                     ? 'text-white dark:text-white' 
                     : 'text-teal-600 dark:text-teal-300 hover:text-teal-800 dark:hover:text-teal-200'}`}
               >
-                {/* Active background with animation */}
                 {activeItem === item && (
                   <span className="absolute inset-0 bg-teal-600 dark:bg-teal-700 -z-10 scale-100 rounded-md"></span>
                 )}
-                
-                {/* Hover effect */}
-                <span className="absolute inset-0 bg-teal-100 dark:bg-gray-800 -z-20 scale-0 rounded-md group-hover:scale-100 transition-transform duration-300"></span>
-                
-                {/* Text with indicator dot */}
                 <span className="flex items-center">
                   {item}
                   {activeItem === item && (
@@ -122,12 +106,10 @@ const Navbar = () => {
                 </span>
               </button>
             ))}
-            
             <div className="ml-4">
               <ThemeToggle />
             </div>
           </div>
-          
           <div className="md:hidden flex items-center">
             <ThemeToggle />
             <button
@@ -136,7 +118,6 @@ const Navbar = () => {
               aria-expanded={isMenuOpen}
             >
               <span className={`absolute inset-0 bg-teal-100 dark:bg-gray-700 transform transition-transform duration-300 ${isMenuOpen ? 'scale-100' : 'scale-0'} rounded-md -z-10`}></span>
-              
               <div className="h-6 w-6 relative">
                 <span className={`absolute h-0.5 w-full bg-current transform transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : 'translate-y-1'}`}></span>
                 <span className={`absolute h-0.5 w-full bg-current transform transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'} translate-y-2.5`}></span>
@@ -146,7 +127,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      
       <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-2 pb-3 space-y-1">
           {navItems.map((item) => (

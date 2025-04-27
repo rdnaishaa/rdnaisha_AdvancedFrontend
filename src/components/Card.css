@@ -1,0 +1,48 @@
+.rolling-gallery-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .carousel {
+    cursor: grab;
+    overflow: hidden;
+    padding: 10px 0;
+    margin: 0 -20px;
+  }
+  
+  .inner-carousel {
+    display: flex;
+    padding: 10px 20px;
+  }
+  
+  .card-item {
+    width: 300px;
+    min-height: 200px;
+    margin-right: 20px;
+    flex: 0 0 auto;
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .carousel {
+      background: rgba(17, 24, 39, 0.05);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card-item {
+      width: 260px;
+    }
+    
+    .rolling-gallery-container {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card-item {
+      width: 240px;
+    }
+  }
