@@ -1,4 +1,3 @@
-// components/ThemeContext.jsx
 import { createContext, useState, useEffect } from 'react';
 
 // Create context
@@ -8,10 +7,10 @@ export const ThemeProvider = ({ children }) => {
   // Check local storage for saved theme preference, default to 'light'
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'light';
+    return savedTheme || 'light';  // Default to 'light' if not found
   });
 
-  // Update localStorage when theme changes
+  // Update localStorage and HTML root element when theme changes
   useEffect(() => {
     localStorage.setItem('theme', theme);
     
